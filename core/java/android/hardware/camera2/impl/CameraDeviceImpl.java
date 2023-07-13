@@ -1520,17 +1520,6 @@ public class CameraDeviceImpl extends CameraDevice
         String packageName = ActivityThread.currentOpPackageName();
         String packageList = SystemProperties.get("persist.vendor.camera.privapp.list");
 
-        /**
-         * e.g.
-         * persist.sys.aux.camera_oem_package=com.oneplus.camera
-         */
-        String cameraPackage = SystemProperties.get("persist.sys.aux.camera_oem_package", "");
-
-	
-        if (cameraPackage != null && !cameraPackage.isEmpty() && packageName.toLowerCase().contains(cameraPackage.toLowerCase())) {
-            return true;
-        }
-
         if (packageList.length() > 0) {
             TextUtils.StringSplitter splitter = new TextUtils.SimpleStringSplitter(',');
             splitter.setString(packageList);
@@ -1599,7 +1588,6 @@ public class CameraDeviceImpl extends CameraDevice
                 throw new IllegalArgumentException("Input config with format " +
                         inputFormat + " and size " + inputConfig.getWidth() + "x" +
                         inputConfig.getHeight() + " not supported by camera id " + mCameraId);
-
             }
         }
     }
